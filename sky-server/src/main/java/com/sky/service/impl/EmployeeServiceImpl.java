@@ -34,6 +34,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeMapper employeeMapper;
 
     @Override
+    public void updateStatus(Integer status, Long id) {
+        Employee employee=Employee.builder()
+                .id(id)
+                .status(status)
+                .build();
+        employeeMapper.update(employee);
+    }
+
+    @Override
     public PageResult pagequery(EmployeePageQueryDTO employeePageQueryDTO) {
         PageHelper.startPage(employeePageQueryDTO.getPage(),employeePageQueryDTO.getPageSize());
         Page<Employee> page =employeeMapper.pagequery(employeePageQueryDTO);
